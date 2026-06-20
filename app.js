@@ -6,6 +6,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 menu?.addEventListener('click', () => {
   const open = nav.classList.toggle('open');
   menu.setAttribute('aria-expanded', open);
+  document.body.classList.toggle('menu-open', open);
 });
 document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 
@@ -149,3 +150,43 @@ function startMotion() {
 
 startMotion();
 document.querySelectorAll('.system-card').forEach(card=>card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--card-x',`${e.clientX-r.left}px`);card.style.setProperty('--card-y',`${e.clientY-r.top}px`)}));
+
+// Mobile navigation and animations: preserve the same glass-menu experience on touch screens.
+(function initMobileExperience(){
+  const isMobile = matchMedia('(max-width:850px)');
+  const closeMenu = () => {
+    if (!nav || !menu) return;
+    nav.classList.remove('open');
+    menu.setAttribute('aria-expanded','false');
+    document.body.classList.remove('menu-open');
+  };
+  menu?.addEventListener('click', () => {
+    const isOpen = nav?.classList.contains('open');
+    document.body.classList.toggle('menu-open', !isOpen);
+  });
+  document.addEventListener('click', (event) => {
+    if (!isMobile.matches || !nav?.classList.contains('open')) return;
+    if (!nav.contains(event.target) && !pill?.contains(event.target)) closeMenu();
+  });
+  document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', closeMenu));
+
+  const animated = ['.intro-copy','.intro-detail','.system-card','.method-sticky','.method-list article','.project','.contact > *'];
+  animated.forEach(sel => document.querySelectorAll(sel).forEach(el => el.classList.add('reveal-mobile')));
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.12, rootMargin:'0px 0px -36px'});
+  function observeMobile(){
+    if (!isMobile.matches || reduceMotion.matches) {
+      document.querySelectorAll('.reveal-mobile').forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+    document.querySelectorAll('.reveal-mobile').forEach(el => observer.observe(el));
+  }
+  isMobile.addEventListener?.('change', observeMobile);
+  observeMobile();
+})();
