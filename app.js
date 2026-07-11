@@ -8,7 +8,11 @@ menu?.addEventListener('click', () => {
   menu.setAttribute('aria-expanded', open);
   document.body.classList.toggle('menu-open', open);
 });
-document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  nav.classList.remove('open');
+  menu?.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('menu-open');
+}));
 
 const pill = document.querySelector('.nav-pill');
 pill?.addEventListener('pointermove', e => {
@@ -57,14 +61,23 @@ function drawStars(t){
   nodes.forEach(([x,y],i)=>{const px=ox+x*sc,py=oy+y*sc;const pulse=.62+Math.sin(t/700+i)*.25;ctx.fillStyle=i===3?`rgba(202,255,88,${pulse})`:`rgba(155,222,255,${.5+pulse*.25})`;ctx.beginPath();ctx.arc(px,py,(i===3?3.6:2.1)*sc,0,Math.PI*2);ctx.fill();});
   const p=nodes[3];ctx.fillStyle='rgba(202,255,88,.74)';ctx.font=`10px DM Mono, monospace`;ctx.fillText('POLARIS',ox+(p[0]+10)*sc,oy+(p[1]-8)*sc);
   ctx.restore();
-  requestAnimationFrame(drawStars);
+  skyFrame = skyVisible ? requestAnimationFrame(drawStars) : 0;
 }
-resizeStars(); addEventListener('resize',resizeStars,{passive:true}); requestAnimationFrame(drawStars);
+let skyFrame = 0;
+let skyVisible = true;
+const skyObserver = new IntersectionObserver(([entry]) => {
+  skyVisible = entry.isIntersecting;
+  if (skyVisible && !skyFrame && !reduceMotion.matches) skyFrame = requestAnimationFrame(drawStars);
+});
+if (c) skyObserver.observe(c);
+resizeStars(); addEventListener('resize',resizeStars,{passive:true});
+if (!reduceMotion.matches) skyFrame = requestAnimationFrame(drawStars);
 
 const cards = [...document.querySelectorAll('.rotator-card')];
 const dots = [...document.querySelectorAll('.rotator-dots i')];
 let carouselIndex = 0;
 setInterval(() => {
+  if (reduceMotion.matches || document.hidden) return;
   cards.forEach(x => x.classList.remove('active')); dots.forEach(x => x.classList.remove('on'));
   carouselIndex = (carouselIndex + 1) % 4;
   cards[carouselIndex]?.classList.add('active'); dots[carouselIndex]?.classList.add('on');
@@ -139,7 +152,8 @@ function startMotion() {
   function update(){
     queued=false;
     header?.classList.toggle('scrolled', scrollY>18);
-    if(!desktop.matches || reduceMotion.matches){type.textContent=text;type.classList.add('is-complete');steps.forEach((s,i)=>s.classList.toggle('in-view',i===0));return;}
+    if(reduceMotion.matches){type.textContent=text;type.classList.add('is-complete');steps.forEach((s,i)=>s.classList.toggle('in-view',i===0));return;}
+    if(!desktop.matches){setType(progressFor(intro));steps.forEach((s,i)=>s.classList.toggle('in-view',i===0));return;}
     const p1=progressFor(intro), p3=progressFor(method);
     intro.style.setProperty('--chapter-progress',p1); method.style.setProperty('--method-progress',p3);
     setType(p1); setMethod(p3);

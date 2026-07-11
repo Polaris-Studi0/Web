@@ -1,0 +1,18 @@
+{
+  "name": "Polaris Studio",
+  "short_name": "Polaris",
+  "description": "Diseño web, automatización e inteligencia artificial para negocios.",
+  "lang": "es-CO",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070b16",
+  "theme_color": "#070b16",
+  "icons": [
+    {
+      "src": "/polaris-logo-white.png",
+      "sizes": "2076x540",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
