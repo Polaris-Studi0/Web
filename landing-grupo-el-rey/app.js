@@ -125,6 +125,8 @@ function unlockDemo() {
     element.removeAttribute("data-access-protected");
   });
   document.body.classList.remove("demo-locked");
+  document.documentElement.classList.remove("demo-locked-root");
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#fbbb2e");
   window.setTimeout(() => {
     const gate = document.querySelector("#accessGate");
     if (gate) gate.hidden = true;
@@ -143,6 +145,8 @@ function initializeAccessGate() {
   if (sessionStorage.getItem(ACCESS_CONFIG.sessionKey) === ACCESS_CONFIG.credentialHash) {
     gate.hidden = true;
     document.body.classList.remove("demo-locked");
+    document.documentElement.classList.remove("demo-locked-root");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#fbbb2e");
     return;
   }
 
