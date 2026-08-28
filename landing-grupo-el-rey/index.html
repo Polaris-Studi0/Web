@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ofertas, sedes y atención por WhatsApp de Almacenes El Rey.">
+  <meta name="theme-color" content="#fbbb2e">
+  <title>Almacenes El Rey | Encuentra tu sede</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="demo-locked">
+  <section class="access-gate" id="accessGate" aria-labelledby="accessTitle">
+    <div class="access-noise" aria-hidden="true"></div>
+    <div class="access-orb access-orb-one" aria-hidden="true"></div>
+    <div class="access-orb access-orb-two" aria-hidden="true"></div>
+    <div class="access-shell">
+      <div class="access-intro">
+        <img src="assets/polaris-logo-white.png" alt="Polaris Studio" class="access-logo">
+        <p class="access-kicker"><span></span> DEMO PRIVADA · POLARIS STUDIO</p>
+        <h1>Una vista previa<br><em>antes de publicar.</em></h1>
+        <p>Este espacio contiene una propuesta privada preparada para Grupo El Rey.</p>
+        <div class="access-signal" aria-hidden="true"><i></i><span>ACCESO CONTROLADO</span></div>
+      </div>
+
+      <form class="access-card" id="accessForm" novalidate>
+        <div class="access-card-index">01 / ACCESO</div>
+        <h2 id="accessTitle">Ingresa al panel de prueba</h2>
+        <p>Usa las credenciales asignadas a este proyecto.</p>
+        <label for="accessUser">Usuario</label>
+        <input id="accessUser" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+        <label for="accessPassword">Contraseña</label>
+        <div class="password-field">
+          <input id="accessPassword" name="password" type="password" autocomplete="current-password" required>
+          <button type="button" id="togglePassword" aria-label="Mostrar contraseña">VER</button>
+        </div>
+        <p class="access-error" id="accessError" role="alert" aria-live="polite"></p>
+        <button class="access-submit" type="submit"><span>Entrar al demo</span><b>→</b></button>
+        <small>Propuesta confidencial · Polaris Studio</small>
+      </form>
+    </div>
+  </section>
+
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Almacenes El Rey, inicio">
+      <img src="assets/elreylogo.png" alt="Almacenes El Rey">
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="#sedes">Sedes</a>
+      <button class="nav-contact" data-action="general">Atención general</button>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">OFERTA DE TEMPORADA</p>
+        <h1>Los precios bajos<br><em>mandan aquí.</em></h1>
+        <p class="hero-copy">Encuentra promociones para tu hogar y habla directamente con el equipo de tu sede El Rey.</p>
+        <div class="hero-actions">
+          <button class="button button-primary" data-action="open-locations">Hablar por WhatsApp <span>→</span></button>
+          <button class="button button-light" data-action="locate">⌖ Encontrar sede cercana</button>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="deal-label">PRECIO<br>DE REY</span>
+        <img class="hero-logo" src="assets/elreylogo.png" alt="">
+        <span class="burst burst-one"></span><span class="burst burst-two"></span>
+      </div>
+    </section>
+
+    <section class="route-panel" id="routePanel" aria-live="polite" hidden></section>
+
+    <section class="quick-choice">
+      <div>
+        <p class="eyebrow red">CONTACTO DIRECTO</p>
+        <h2>¿Ya sabes qué sede necesitas?</h2>
+        <p>El mensaje llevará el contexto de la sede para que nuestro asistente pueda atenderte mejor.</p>
+      </div>
+      <form id="locationForm" class="location-form">
+        <label class="sr-only" for="locationSelect">Selecciona una sede</label>
+        <select id="locationSelect" required><option value="">Selecciona una sede</option></select>
+        <button class="button button-dark" type="submit">Continuar por WhatsApp</button>
+      </form>
+    </section>
+
+    <section class="locations-section" id="sedes">
+      <div class="section-heading">
+        <div><p class="eyebrow red">10 PUNTOS CERCA DE TI</p><h2>Encuentra tu El Rey</h2></div>
+        <button class="text-link" data-action="locate">Usar mi ubicación →</button>
+      </div>
+      <div class="locations-grid" id="locationsGrid"></div>
+    </section>
+
+    <section class="social-band">
+      <div><p class="eyebrow">SÍGUENOS</p><h2>Las ofertas también viven en Instagram.</h2></div>
+      <a class="button button-light" id="instagramLink" href="#" target="_blank" rel="noopener noreferrer">Ver Instagram →</a>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand brand-footer" href="#inicio" aria-label="Almacenes El Rey, inicio"><img src="assets/elreylogo.png" alt="Almacenes El Rey"></a>
+    <p>Almacenes El Rey · Antioquia, Colombia</p>
+    <button class="text-link footer-link" data-action="general">Atención general por WhatsApp</button>
+  </footer>
+
+  <button class="whatsapp-float" data-action="open-locations" aria-label="Abrir opciones de WhatsApp">WA</button>
+
+  <div class="modal" id="locationsModal" aria-hidden="true">
+    <div class="modal-backdrop" data-action="close-modal"></div>
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" data-action="close-modal" aria-label="Cerrar">×</button>
+      <p class="eyebrow red">WHATSAPP</p>
+      <h2 id="modalTitle">¿Cómo podemos ayudarte?</h2>
+      <p>Elige una sede, encuéntrala con tu ubicación o entra a atención general.</p>
+      <label for="modalLocationSelect">Selecciona una sede</label>
+      <select id="modalLocationSelect"><option value="">Selecciona una sede</option></select>
+      <button class="button button-primary full" data-action="modal-location">Hablar con esta sede</button>
+      <button class="button button-outline full" data-action="locate">⌖ Encontrar la más cercana</button>
+      <button class="text-link modal-general" data-action="general">Necesito atención general →</button>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
