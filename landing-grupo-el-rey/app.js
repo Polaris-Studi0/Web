@@ -127,6 +127,7 @@ function unlockDemo() {
   document.body.classList.remove("demo-locked");
   document.documentElement.classList.remove("demo-locked-root");
   document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#fbbb2e");
+  document.querySelector('meta[name="color-scheme"]')?.setAttribute("content", "light");
   window.setTimeout(() => {
     const gate = document.querySelector("#accessGate");
     if (gate) gate.hidden = true;
@@ -147,6 +148,7 @@ function initializeAccessGate() {
     document.body.classList.remove("demo-locked");
     document.documentElement.classList.remove("demo-locked-root");
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#fbbb2e");
+    document.querySelector('meta[name="color-scheme"]')?.setAttribute("content", "light");
     return;
   }
 
