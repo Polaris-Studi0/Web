@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="Mockup del panel operativo de pedidos y domicilios de Grupo El Rey.">
+  <title>Panel de domicilios | Grupo El Rey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="sidebar-brand" href="../index.html" aria-label="Volver a Almacenes El Rey">
+      <img src="../assets/elreylogo.png" alt="Almacenes El Rey">
+      <span>OPERACIÓN</span>
+    </a>
+    <nav aria-label="Navegación del panel">
+      <button class="nav-view active" data-view="active"><i>01</i> Pedidos <b id="navActiveCount">6</b></button>
+      <button class="nav-view" data-view="ready"><i>02</i> Por despacho <b id="navReadyCount">3</b></button>
+      <button class="nav-view" data-view="dispatched"><i>03</i> Historial</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="reset-demo" id="resetDemo">↺ Reiniciar demo</button>
+      <div class="sidebar-status"><span></span><p><b>Sistema activo</b><small>Actualizado ahora</small></p></div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div><p class="eyebrow">CENTRO DE OPERACIONES</p><h1>Pedidos de hoy</h1></div>
+      <div class="topbar-actions">
+        <span class="demo-badge"><i></i> Vista demo</span>
+        <label class="branch-select"><span>Sede</span><select id="branchSelect" aria-label="Seleccionar sede">
+          <option value="all">Todas las sedes</option><option>Robledo Aures</option><option>Robledo Diamante - Calle 80</option><option>Santa Cruz</option><option>San Gabriel, Itagüí</option><option>Robledo Diamante - Diagonal 85</option><option>Floresta</option><option>La 80</option><option>La Estrella</option><option>Campo Valdez</option><option>San Antonio de Prado</option>
+        </select></label>
+        <button class="user-button" aria-label="Perfil de usuario">LM</button>
+      </div>
+    </header>
+
+    <section class="summary" aria-label="Resumen del día">
+      <article><span>EN PREPARACIÓN</span><strong id="preparingCount">3</strong><small>La sede está alistando</small></article>
+      <article><span>PENDIENTES POR DESPACHO</span><strong id="readyCount">3</strong><small>Listos para domiciliario</small></article>
+      <article><span>DESPACHADOS</span><strong id="dispatchedCount">18</strong><small>Completados hoy</small></article>
+      <article class="cutoff"><span>CORTE DOMICILIOS</span><strong>7:00 <small>p. m.</small></strong><small>Gestión directa hasta esta hora</small></article>
+    </section>
+
+    <section class="orders" id="pedidos">
+      <div class="orders-head"><div><p class="eyebrow" id="queueLabel">COLA EN TIEMPO REAL</p><h2 id="ordersTitle">Pedidos activos <span id="visibleCount">7</span></h2></div><button class="sync-button" id="syncButton"><i></i> En vivo</button></div>
+      <div class="orders-tools">
+        <label class="search-box"><span>⌕</span><input id="orderSearch" type="search" placeholder="Buscar pedido o producto" autocomplete="off"></label>
+        <div class="status-filters" aria-label="Filtrar por estado">
+          <button class="active" data-status-filter="all">Todos</button><button data-status-filter="preparing">En preparación</button><button data-status-filter="ready">Por despacho</button><button data-status-filter="dispatched">Despachados</button>
+        </div>
+      </div>
+      <div class="orders-list" id="ordersList"></div>
+      <div class="empty-state" id="emptyState" hidden><span>✓</span><h3>Todo al día</h3><p>No hay pedidos que coincidan con este filtro.</p><button id="clearFilters">Ver todos los pedidos</button></div>
+    </section>
+  </main>
+  <nav class="mobile-bar" aria-label="Navegación móvil"><button class="active" data-view="active"><span>▦</span>Pedidos</button><button data-view="ready"><span>→</span>Por despacho</button><button data-view="dispatched"><span>✓</span>Historial</button></nav>
+
+  <div class="drawer-shell" id="detailDrawer" aria-hidden="true">
+    <button class="drawer-backdrop" data-close-drawer aria-label="Cerrar detalle"></button>
+    <aside class="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <button class="drawer-close" data-close-drawer aria-label="Cerrar">×</button>
+      <p class="eyebrow">DETALLE DEL PEDIDO</p><h2 id="detailTitle"></h2>
+      <div id="detailContent"></div>
+    </aside>
+  </div>
+
+  <div class="modal-shell" id="dispatchModal" aria-hidden="true">
+    <button class="modal-backdrop" data-close-modal aria-label="Cancelar"></button>
+    <section class="dispatch-modal" role="dialog" aria-modal="true" aria-labelledby="dispatchTitle">
+      <button class="modal-close" data-close-modal aria-label="Cerrar">×</button>
+      <span class="confirm-icon">→</span><p class="eyebrow">CONFIRMAR MOVIMIENTO</p><h2 id="dispatchTitle">Pedido listo para despacho</h2>
+      <p id="dispatchCopy">Confirma que todos los productos están separados y empacados.</p>
+      <div class="courier-confirm" id="courierConfirm" hidden><span>DOMICILIARIO ASIGNADO</span><strong id="confirmCourierName"></strong><b id="confirmCourierPlate"></b></div>
+      <div class="modal-actions"><button class="cancel-button" data-close-modal>Cancelar</button><button class="confirm-button" id="confirmDispatch">Confirmar <span>→</span></button></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><span></span><button id="undoAction">Deshacer</button></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
