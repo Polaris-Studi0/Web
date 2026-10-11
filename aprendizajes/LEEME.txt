@@ -1,0 +1,19 @@
+APRENDIZAJES — LABORATORIO DE IDEAS Y NEGOCIOS
+
+1. Abre index.html con doble clic. Funciona sin internet y no necesita instalación.
+2. Pulsa «Leer reflexión» para explorar cada semana, de la 3 a la 8.
+3. En «Editar mi bitácora» puedes añadir tu nombre, tu perfil de Instagram, ajustar los textos y completar tus tests cuando tengas los resultados.
+4. «Guardar cambios» conserva la edición en ese navegador. «Descargar HTML» crea una copia con todo lo editado: guarda esa copia como index.html en esta carpeta para compartir tu versión actualizada.
+5. «Copiar publicación» prepara el texto de cada semana para compartirlo en Instagram. Si el navegador no permite copiar, descarga un archivo de texto.
+6. «Imprimir / Guardar PDF» incluye las seis reflexiones completas y el cierre.
+
+ANTES DE ENTREGAR
+Revisa que las reflexiones y las emociones representen tu experiencia. La comparación de Pretest y Test de Salida está pendiente porque no se suministraron resultados. La consigna solicita publicaciones en una red social y su enlace público o capturas: esta web reúne el contenido y permite prepararlo para publicar.
+
+CONTENIDO
+Seis textos originales inspirados en los conceptos de Weekly Learning.pdf y las publicaciones públicas de https://www.instagram.com/globlalwithmajo/ . No se atribuyen al usuario proyectos, cifras o experiencias concretas de sus compañeros. La reflexión final corresponde a la sexta publicación, semana 8.
+
+ARCHIVOS
+index.html: web completa (diseño, textos y funciones en un único archivo).
+publicaciones.txt: las seis publicaciones en texto para revisar y compartir.
+LEEME.txt: estas instrucciones.
